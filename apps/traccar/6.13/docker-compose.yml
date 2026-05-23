@@ -1,0 +1,19 @@
+networks:
+  traccar-network:
+    driver: bridge
+
+services:
+  traccar:
+    image: traccar/traccar:6.13
+    container_name: ${CONTAINER_NAME}
+    labels:
+      createdBy: "Apps"
+    restart: always
+    networks:
+      - traccar-network
+    hostname: traccar
+    ports:
+      - ${PANEL_APP_PORT_HTTP}:8082
+    volumes:
+      - ${TRACCAR_ROOT_PATH}/logs:/opt/traccar/logs:rw
+      - ${TRACCAR_ROOT_PATH}/traccar.xml:/opt/traccar/conf/traccar.xml:ro

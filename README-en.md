@@ -18,9 +18,7 @@
 
 ***
 
-### New This Week
-
-<table border="0" cellpadding="10" cellspacing="0"><tr><td width="33%" valign="top" align="center"><a href="https://github.com/pooneyy/1Panel-Appstore/tree/localApps/apps/gatus"><img src="https://raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/localApps/apps/gatus/logo.png" alt="Gatus" width="64" height="64"><br><strong>Gatus</strong></a><br>Developer-oriented health dashboard</td></tr></table>
+<!-- ### New This Week -->
 
 <!-- ### Coming Soon -->
 
@@ -59,7 +57,10 @@ Dedicated to running various Docker applications with just one click. Enjoy conv
 > The current script supports specifying the installation path for 1panel using parameters, as well as specifying the Apps to be imported. If your 1panel is installed in /opt, you just need to:
 >
 > ```bash
-> curl -sSL https:// ...  update_local_appstore.sh | bash -s -- --1panel-path /opt --app app_name_1  --app app_name_2
+> bash <(curl -sSL https://raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh) \
+>   --1panel-path /opt \
+>   --app app_name_1  \
+>   --app app_name_2
 > ```
 >
 > **app_name must be the name of the folder below the repository apps**
@@ -67,19 +68,19 @@ Dedicated to running various Docker applications with just one click. Enjoy conv
 In the `Shell Script` task type in the `1Panel` scheduled tasks, add and execute the following command, or run the following command in the terminal:
 
 ```shell
-curl -sSL https://raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh | bash
+bash <(curl -sSL https://raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh)
 ```
 jsdelivr
 ```shell
-curl -sSL https://fastly.jsdelivr.net/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh | bash
+bash <(curl -sSL https://fastly.jsdelivr.net/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh)
 ```
 JSDMirror(Tencent EdgeOne)
 ```shell
-curl -sSL https://cdn.jsdmirror.com/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh | bash
+bash <(curl -sSL https://cdn.jsdmirror.com/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh)
 ```
 gh-proxy.com(Cloudflare)
 ```shell
-curl -sSL https://gh-proxy.com/raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh | bash
+bash <(curl -sSL https://gh-proxy.com/raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh)
 ```
 
 Then refresh the local applications in the app store.

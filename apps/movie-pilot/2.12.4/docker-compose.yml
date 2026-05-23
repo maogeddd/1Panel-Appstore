@@ -1,0 +1,41 @@
+networks:
+  1panel-network:
+    external: true
+
+services:
+  movie-pilot-v2:
+    image: jxxghp/moviepilot-v2:2.12.4
+    container_name: ${CONTAINER_NAME}
+    labels:
+      createdBy: "Apps"
+    restart: always
+    stdin_open: true
+    tty: true
+    networks:
+      - 1panel-network
+    ports:
+      - ${PANEL_APP_PORT_HTTP}:3000
+      - ${PANEL_APP_PORT_API}:3001
+    env_file:
+      - ./envs/movie-pilot.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${MOVIEPILOT_ROOT_PATH}/config:/config
+      - ${MOVIEPILOT_ROOT_PATH}/ms-playwright:/moviepilot/.cache/ms-playwright
+      - ${MOVIEPILOT_DOWNLOADS_PATH}/download:/download
+      - ${MOVIEPILOT_DOWNLOADS_PATH}/media:/media
+    environment:
+      - NGINX_PORT=3000
+      - PORT=3001
+      - PUID=0
+      - PGID=0
+      - UMASK=022
+      - TZ=Asia/Shanghai
+      - CACHE_BACKEND_TYPE=cachetools
+      - AUTH_SITE=iyuu,hhclub,audiences,hddolby,zmpt,freefarm,hdfans,wintersakura,leaves,ptba,icc2022,xingtan,ptvicomo,agsvpt,hdkyl,qingwa,discfan,haidan,rousi,sunny,ptcafe,ptzone,kufei,yemapt
+      - HTTP_PROXY=${PROXY_HOST}
+      - HTTPS_PROXY=${PROXY_HOST}
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m

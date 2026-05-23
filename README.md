@@ -17,9 +17,7 @@
 
 ***
 
-### 本周上新
-
-<table border="0" cellpadding="10" cellspacing="0"><tr><td width="33%" valign="top" align="center"><a href="https://github.com/pooneyy/1Panel-Appstore/tree/localApps/apps/gatus"><img src="https://raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/localApps/apps/gatus/logo.png" alt="Gatus" width="64" height="64"><br><strong>Gatus</strong></a><br>面向开发者的健康监控面板</td></tr></table>
+<!-- ### 本周上新 -->
 
 <!-- ### 即将推出 -->
 
@@ -58,7 +56,10 @@
 > 当前脚本支持使用参数指定 1panel 的安装路径，以及指定想导入的Apps。假如你的 1panel 安装在 /opt，你只需要：
 >
 > ```bash
-> curl -sSL https:// ...  update_local_appstore.sh | bash -s -- --1panel-path /opt --app app_name_1  --app app_name_2
+> bash <(curl -sSL https://fastly.jsdelivr.net/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh) \
+>   --1panel-path /opt \
+>   --app app_name_1  \
+>   --app app_name_2
 > ```
 >
 > **app_name 必须是仓库 apps 下面的文件夹名**
@@ -66,19 +67,19 @@
 `1Panel`计划任务类型`Shell 脚本`的计划任务框里，添加并执行以下命令，或者终端运行以下命令，
 
 ```shell
-curl -sSL https://raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh | bash
+bash <(curl -sSL https://raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh)
 ```
 jsdelivr
 ```shell
-curl -sSL https://fastly.jsdelivr.net/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh | bash
+bash <(curl -sSL https://fastly.jsdelivr.net/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh)
 ```
 JSDMirror(Tencent EdgeOne)
 ```shell
-curl -sSL https://cdn.jsdmirror.com/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh | bash
+bash <(curl -sSL https://cdn.jsdmirror.com/gh/pooneyy/1Panel-Appstore@script/update_local_appstore.sh)
 ```
 gh-proxy.com(Cloudflare)
 ```shell
-curl -sSL https://gh-proxy.com/raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh | bash
+bash <(curl -sSL https://gh-proxy.com/raw.githubusercontent.com/pooneyy/1Panel-Appstore/refs/heads/script/update_local_appstore.sh)
 ```
 
 然后应用商店刷新本地应用即可。

@@ -1,8 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
+  "baseBranchPatterns": ["localApps", "config"],
   "gitIgnoredAuthors": [
     "41898282+github-actions[bot]@users.noreply.github.com",
     "85266337+pooneyy@users.noreply.github.com"
@@ -17,7 +16,13 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["major", "pin", "pinDigest", "digest", "lockFileMaintenance", "rollback", "bump", "replacement"],
+      "matchManagers": ["!github-actions"],
       "addLabels": ["{{ updateType }}"]
+    },
+    {
+      "matchBaseBranches": ["localApps"],
+      "matchManagers": ["github-actions"],
+      "enabled": false
     },
     {
       "matchManagers": [
@@ -99,6 +104,36 @@
     {
       "matchPackageNames": ["gitlab/gitlab**"],
       "groupName": "GitLab"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/pooneyy/php", "php"],
+      "matchCurrentVersion": "/^(7.4[^\\s]*)/",
+      "allowedVersions": "/^(7.4[^\\s]*)/"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/pooneyy/php"],
+      "matchCurrentVersion": "/^(8.1[^\\s]*)/",
+      "allowedVersions": "/^(8.1[^\\s]*)/"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/pooneyy/php"],
+      "matchCurrentVersion": "/^(8.2[^\\s]*)/",
+      "allowedVersions": "/^(8.2[^\\s]*)/"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/pooneyy/php"],
+      "matchCurrentVersion": "/^(8.3[^\\s]*)/",
+      "allowedVersions": "/^(8.3[^\\s]*)/"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/pooneyy/php"],
+      "matchCurrentVersion": "/^(8.4[^\\s]*)/",
+      "allowedVersions": "/^(8.4[^\\s]*)/"
+    },
+    {
+      "matchPackageNames": ["ghcr.io/pooneyy/php"],
+      "matchCurrentVersion": "/^(8.5[^\\s]*)/",
+      "allowedVersions": "/^(8.5[^\\s]*)/"
     },
     {
       "matchPackageNames": ["tdengine/tsdb**"],
@@ -267,27 +302,6 @@
     },
     {
       "matchFileNames": [
-        "apps/php-unofficial/7.4.*/*.yml",
-        "apps/php-unofficial/7.4.*/Dockerfile"
-      ],
-      "allowedVersions": "/^7.4.*/"
-    },
-    {
-      "matchFileNames": [
-        "apps/php-unofficial/8.1.*/*.yml",
-        "apps/php-unofficial/8.1.*/Dockerfile"
-      ],
-      "allowedVersions": "/^8.1.*/"
-    },
-    {
-      "matchFileNames": [
-        "apps/php-unofficial/8.4.*/*.yml",
-        "apps/php-unofficial/8.4.*/Dockerfile"
-      ],
-      "allowedVersions": "/^8.4.*/"
-    },
-    {
-      "matchFileNames": [
         "apps/reader/2.7.*/*.yml"
       ],
       "allowedVersions": "/^2.7.*/"
@@ -297,6 +311,18 @@
         "apps/syncthing*/1.*/*.yml"
       ],
       "allowedVersions": "/^1.*/"
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "处理 shell 脚本中的镜像",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/).+\\.sh$/"],
+      "matchStrings": [
+        // 调试正则表达式: https://regexr.com/8jlns
+        "(?:# renovate)(?:\\n+)?([\\S]+=)(?<depName>[\\S]+):(?<currentValue>[\\S]+)"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}"
     }
   ],
   "prCreation": "immediate"

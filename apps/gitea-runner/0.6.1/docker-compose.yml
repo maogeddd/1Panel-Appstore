@@ -1,0 +1,25 @@
+networks:
+  1panel-network:
+    external: true
+
+services:
+  gitea:
+    image: gitea/act_runner:0.6.1
+    container_name: ${CONTAINER_NAME}
+    labels:
+      createdBy: "Apps"
+    restart: always
+    networks:
+      - 1panel-network
+    privileged: true
+    volumes:
+      - ${GITEA_RUNNER_ROOT_PATH}/config.yaml:/config.yaml
+      - ${GITEA_RUNNER_ROOT_PATH}/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      GITEA_INSTANCE_URL: "${GITEA_INSTANCE_URL}"
+      GITEA_RUNNER_REGISTRATION_TOKEN: "${GITEA_RUNNER_REGISTRATION_TOKEN}"
+      GITEA_RUNNER_NAME: "${GITEA_RUNNER_NAME}"
+      GITEA_RUNNER_LABELS: "${GITEA_RUNNER_LABELS}"
