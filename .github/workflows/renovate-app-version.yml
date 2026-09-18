@@ -16,7 +16,7 @@ jobs:
     name: Get Latest Commit Author
     runs-on: ubuntu-latest
     outputs:
-      latest_commit_author: ${{ steps.latest-commit-author.outputs.latest_commit_author }}
+      latest-commit-author: ${{ steps.latest-commit-author.outputs.latest-commit-author }}
     steps:
       - name: Get latest commit author
         id: latest-commit-author
@@ -27,14 +27,14 @@ jobs:
             /repos/${{ github.repository}}/commits/${{ github.event.pull_request.head.ref }})
           author=$(echo "$resp" | jq -r '.author.login // empty')
           echo "the Author of Latest Commit on Head Branch: $author"
-          echo "latest_commit_author=$author" >> $GITHUB_OUTPUT
+          echo "latest-commit-author=$author" >> $GITHUB_OUTPUT
 
   update-app-version:
     name: Update App Version
     needs: get-latest-commit-author
     if: |
       github.actor == 'renovate[bot]' &&
-      needs.get-latest-commit-author.outputs.latest_commit_author != github.repository_owner &&
+      needs.get-latest-commit-author.outputs.latest-commit-author != github.repository_owner &&
       startsWith(github.head_ref, 'renovate/')
     runs-on: ubuntu-latest
     permissions:
