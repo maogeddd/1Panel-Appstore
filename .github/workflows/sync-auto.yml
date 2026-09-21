@@ -35,6 +35,10 @@ jobs:
             ssh-host: gitlab.com
             ssh-url: git@gitlab.com:pooneyy1/1panel-appstore.git
             https-url: https://gitlab.com/pooneyy1/1panel-appstore
+          - name: SourceForge
+            ssh-host: git.code.sf.net
+            ssh-url: ssh://pooneyy@git.code.sf.net/p/onepanel-appstore/code
+            https-url: https://sourceforge.net/p/onepanel-appstore
           # - name: Gitlink
           #   ssh-host: code.gitlink.org.cn
           #   ssh-url: git@code.gitlink.org.cn:pooneyy/1Panel-Appstore.git
