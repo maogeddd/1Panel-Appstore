@@ -55,6 +55,7 @@ jobs:
       - name: 配置 SSH agent 并加载私钥
         uses: webfactory/ssh-agent@v0.10.0
         with:
+          log-public-key: false
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: 添加目标主机的公钥
